@@ -26,13 +26,17 @@ func (t *Transaction) Save() error {
 	if err != nil {
 		return err
 	}
+	
 	defer stmt.Close()
+
 	result, err := stmt.Exec(t.ClientId, t.Date, t.Amount, t.Currency, t.CommissionAmount, t.CommissionCurrency)
 	if err != nil {
 		return err
 	}
+
 	id, err := result.LastInsertId()
 	t.ID = id
+
 	return err
 }
 

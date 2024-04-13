@@ -31,7 +31,7 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 
 		historicalRatesUrl.Path = "/historical"
 		q := historicalRatesUrl.Query()
-		q.Set("date", "2021-01-01")
+		q.Set("date", trx.Date)
 		q.Set("access_key", os.Getenv("EXCHANGE_RATE_API_KEY"))
 		q.Set("currencies", "EUR")
 		q.Set("source", trx.Currency)
@@ -61,8 +61,8 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 		quote := data.Quotes[trx.Currency+"EUR"]
 
 		if quote == 0 {
-			log.Fatal("Could not get quote")
-			return errors.New("Could not get quote")
+			log.Fatal("could not get quote")
+			return errors.New("could not get quote")
 		}
 
 		trx.Amount = trx.Amount * quote
