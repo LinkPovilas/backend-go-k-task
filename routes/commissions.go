@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -15,7 +14,7 @@ func calculateCommission(c *gin.Context) {
 	var trx models.Transaction
 	err := c.ShouldBindJSON(&trx)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request body. Check if all fields are provided."})
 		return
 	}
