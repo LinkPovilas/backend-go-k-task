@@ -1,0 +1,12 @@
+### REST Client for Visual Studio Code https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+### Calculate commission
+POST http://localhost:8080/commissions
+Content-Type: application/json
+
+{
+    "date": "2021-01-04",
+    "amount": 0.01,
+    "currency": "EUR",
+    "client_id": 7
+}
