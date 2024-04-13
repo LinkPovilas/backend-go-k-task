@@ -33,8 +33,7 @@ func createTransactionsTable() {
     amount REAL NOT NULL,
     currency TEXT NOT NULL,
     commission_amount REAL NOT NULL,
-    commission_currency TEXT NOT NULL
-	);`
+    commission_currency TEXT NOT NULL);`
 
 	_, err := DB.Exec(createTransactionsTable)
 

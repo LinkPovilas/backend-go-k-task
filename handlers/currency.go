@@ -52,7 +52,11 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 		}
 
 		var data models.ExchangeRatesData
-		json.Unmarshal(body, &data)
+		err = json.Unmarshal(body, &data)
+		if err != nil {
+			log.Fatal(err)
+			return err
+		}
 
 		quote := data.Quotes[trx.Currency+"EUR"]
 

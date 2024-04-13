@@ -40,8 +40,7 @@ func GetTotalAmountSinceMonthStart(clientId int, dateUntil string) (float64, err
 	query := `
 	SELECT SUM(Amount) AS TotalAmount
 	FROM transactions
-	WHERE client_id = ? AND date BETWEEN ? AND ?
-	`
+	WHERE client_id = ? AND date BETWEEN ? AND ?;`
 
 	date, err := time.Parse("2006-01-02", dateUntil)
 	if err != nil {
