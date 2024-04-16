@@ -4,11 +4,11 @@ import (
 	"math"
 
 	"github.com/LinkPovilas/backend-go-k-task/models"
-	"github.com/LinkPovilas/backend-go-k-task/utils"
 )
 
 type ClientDiscount struct {
-	next CommissionHandler
+	ClientCommissions models.ClientCommissions
+	next              CommissionHandler
 }
 
 func (h *ClientDiscount) SetNext(ch CommissionHandler) {
@@ -16,7 +16,7 @@ func (h *ClientDiscount) SetNext(ch CommissionHandler) {
 }
 
 func (h *ClientDiscount) Handle(trx *models.Transaction) error {
-	clientCommission := utils.GetWhitelistedClientCommission(trx.ClientId)
+	clientCommission := models.GetCommissionByClientID(trx.ClientId, h.ClientCommissions)
 
 	if clientCommission != 0 {
 		trx.CommissionAmount = math.Min(clientCommission, trx.CommissionAmount)

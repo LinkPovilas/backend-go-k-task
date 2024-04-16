@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/LinkPovilas/backend-go-k-task/data"
 	"github.com/LinkPovilas/backend-go-k-task/handlers"
 	"github.com/LinkPovilas/backend-go-k-task/models"
 	"github.com/gin-gonic/gin"
@@ -19,7 +20,9 @@ func calculateCommission(c *gin.Context) {
 		return
 	}
 
-	clientDiscount := &handlers.ClientDiscount{}
+	clientDiscount := &handlers.ClientDiscount{
+		ClientCommissions: data.ClientCommissions,
+	}
 
 	highTurnover := &handlers.HighTurnover{}
 	highTurnover.SetNext(clientDiscount)
