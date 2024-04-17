@@ -15,6 +15,7 @@ For convenience database is seeded with test data.
 ## Running the app
 
 ```bash
+$ docker-compose up -d
 $ go run .
 ```
 
