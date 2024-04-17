@@ -11,7 +11,7 @@ func (h *HighTurnover) SetNext(ch CommissionHandler) {
 }
 
 func (h *HighTurnover) Handle(trx *models.Transaction) error {
-	turnover, err := models.GetTotalAmountSinceMonthStart(trx.ClientId, trx.Date)
+	turnover, err := models.GetTotalAmountSinceMonthStart(trx.ClientID, trx.Date)
 	if err != nil {
 		return err
 	}

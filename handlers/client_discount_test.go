@@ -16,9 +16,9 @@ type testpair struct {
 }
 
 var tests = [3]testpair{
-	{trx: models.Transaction{ClientId: 42, CommissionAmount: 0.25}, expectedCommission: 0.05},
-	{trx: models.Transaction{ClientId: 42, CommissionAmount: 0.03}, expectedCommission: 0.03},
-	{trx: models.Transaction{ClientId: 1, CommissionAmount: 0.07}, expectedCommission: 0.07},
+	{trx: models.Transaction{ClientID: 42, CommissionAmount: 0.25}, expectedCommission: 0.05},
+	{trx: models.Transaction{ClientID: 42, CommissionAmount: 0.03}, expectedCommission: 0.03},
+	{trx: models.Transaction{ClientID: 1, CommissionAmount: 0.07}, expectedCommission: 0.07},
 }
 
 func TestClientDiscountHandle(t *testing.T) {
@@ -28,10 +28,7 @@ func TestClientDiscountHandle(t *testing.T) {
 		}
 		clientDiscount.Handle(&pair.trx)
 
-		got := pair.trx.CommissionAmount
-		want := pair.expectedCommission
-
-		if got != want {
+		if want, got := pair.expectedCommission, pair.trx.CommissionAmount; want != got {
 			t.Errorf("got %v, want %v", got, want)
 		}
 	}

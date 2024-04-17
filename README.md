@@ -18,6 +18,13 @@ For convenience database is seeded with test data.
 $ go run .
 ```
 
+## Test
+
+```bash
+# run all tests within the entire code base
+$ go test ./...
+```
+
 ## Task description
 
 Create a RESTful API with an endpoint for transaction commission calculation. The API must use JSON format for requests and responses.

@@ -1,10 +1,10 @@
 package models
 
-type commission struct {
+type Commission struct {
 	Amount   float64 `json:"amount" binding:"required"`
 	Currency string  `json:"currency" binding:"required"`
 }
 
-func NewCommission(amount float64, currency string) commission {
-	return commission{amount, currency}
+func NewCommission(amount float64, currency string) Commission {
+	return Commission{amount, currency}
 }

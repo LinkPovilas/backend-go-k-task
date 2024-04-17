@@ -10,7 +10,7 @@ import (
 
 type Transaction struct {
 	ID                 int64
-	ClientId           int     `json:"client_id" binding:"required"`
+	ClientID           int     `json:"client_id" binding:"required"`
 	Date               string  `json:"date" binding:"required"`
 	Amount             float64 `json:"amount" binding:"required"`
 	Currency           string  `json:"currency" binding:"required"`
@@ -26,10 +26,10 @@ func (t *Transaction) Save() error {
 	if err != nil {
 		return err
 	}
-	
+
 	defer stmt.Close()
 
-	result, err := stmt.Exec(t.ClientId, t.Date, t.Amount, t.Currency, t.CommissionAmount, t.CommissionCurrency)
+	result, err := stmt.Exec(t.ClientID, t.Date, t.Amount, t.Currency, t.CommissionAmount, t.CommissionCurrency)
 	if err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func (t *Transaction) Save() error {
 	return err
 }
 
-func GetTotalAmountSinceMonthStart(clientId int, dateUntil string) (float64, error) {
+func GetTotalAmountSinceMonthStart(clientID int, dateUntil string) (float64, error) {
 	query := `
 	SELECT SUM(Amount) AS TotalAmount
 	FROM transactions
@@ -52,7 +52,7 @@ func GetTotalAmountSinceMonthStart(clientId int, dateUntil string) (float64, err
 	}
 
 	firstDayOfMonth := fmt.Sprintf("%d-%02d-01", date.Year(), date.Month())
-	row := db.DB.QueryRow(query, clientId, firstDayOfMonth, dateUntil)
+	row := db.DB.QueryRow(query, clientID, firstDayOfMonth, dateUntil)
 
 	var totalAmount sql.NullFloat64
 	err = row.Scan(&totalAmount)

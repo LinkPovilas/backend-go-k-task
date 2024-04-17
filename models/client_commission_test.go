@@ -5,13 +5,13 @@ import (
 )
 
 type testpair struct {
-	ClientId int
+	ClientID int
 	Amount   float64
 }
 
 var tests = []testpair{
-	{ClientId: 1, Amount: 0.04},
-	{ClientId: 2, Amount: 0},
+	{ClientID: 1, Amount: 0.04},
+	{ClientID: 2, Amount: 0},
 }
 
 var FakeClientCommissions = []ClientCommission{
@@ -20,7 +20,7 @@ var FakeClientCommissions = []ClientCommission{
 
 func TestGetCommissionByClientID(t *testing.T) {
 	for _, pair := range tests {
-		got := GetCommissionByClientID(pair.ClientId, FakeClientCommissions)
+		got := GetCommissionByClientID(pair.ClientID, FakeClientCommissions)
 		want := pair.Amount
 
 		if got != want {

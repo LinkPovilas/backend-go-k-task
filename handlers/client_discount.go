@@ -16,7 +16,7 @@ func (h *ClientDiscount) SetNext(ch CommissionHandler) {
 }
 
 func (h *ClientDiscount) Handle(trx *models.Transaction) error {
-	clientCommission := models.GetCommissionByClientID(trx.ClientId, h.ClientCommissions)
+	clientCommission := models.GetCommissionByClientID(trx.ClientID, h.ClientCommissions)
 
 	if clientCommission != 0 {
 		trx.CommissionAmount = math.Min(clientCommission, trx.CommissionAmount)
