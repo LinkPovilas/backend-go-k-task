@@ -15,7 +15,7 @@ func calculateCommission(c *gin.Context) {
 	var trx models.Transaction
 	err := c.ShouldBindJSON(&trx)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request body. Check if all fields are provided."})
 		return
 	}
@@ -35,7 +35,7 @@ func calculateCommission(c *gin.Context) {
 	err = currency.Handle(&trx)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Could not calculate commission."})
 		return
 	}

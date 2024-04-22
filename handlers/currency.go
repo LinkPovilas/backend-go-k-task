@@ -25,7 +25,7 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 		exchangeRatesApiUrl := os.Getenv("EXCHANGE_RATE_API_HOSTNAME")
 		historicalRatesUrl, err := url.Parse(exchangeRatesApiUrl)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 			return err
 		}
 
@@ -39,7 +39,7 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 
 		res, err := http.Get(historicalRatesUrl.String())
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 			return err
 		}
 
@@ -47,21 +47,21 @@ func (h *Currency) Handle(trx *models.Transaction) error {
 
 		body, err := io.ReadAll(res.Body)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 			return err
 		}
 
 		var data models.ExchangeRatesData
 		err = json.Unmarshal(body, &data)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 			return err
 		}
 
 		quote := data.Quotes[trx.Currency+"EUR"]
 
 		if quote == 0 {
-			log.Fatal("could not get quote")
+			log.Println("could not get quote")
 			return errors.New("could not get quote")
 		}
 
